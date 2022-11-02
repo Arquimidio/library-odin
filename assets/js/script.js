@@ -18,7 +18,7 @@ function addBookToLibrary(book) {
 }
 
 /* Creates the necessary elements to display a book with HTML */
-function displaySingleBook({ title, author, pages, wasRead }) {
+function displaySingleBook({ title, author, pages, wasRead }, id) {
     const listItem = document.createElement('li');
     const titleH2 = document.createElement('h2');
     const authorP = document.createElement('p');
@@ -52,6 +52,8 @@ function displaySingleBook({ title, author, pages, wasRead }) {
         wasReadBox, 
         removeBook
     );
+
+    listItem.dataset.id = id;
     bookDisplay.append(listItem);
 }
 
@@ -77,7 +79,7 @@ function submitBook(event) {
     const formData = new FormData(form);
     const newBook = new Book(...formData.values());
     addBookToLibrary(newBook);
-    displaySingleBook(newBook);
+    displaySingleBook(newBook, storedBooks.length);
     form.reset();
     hideBookForm();
 }
