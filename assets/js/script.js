@@ -54,6 +54,8 @@ function displaySingleBook({ title, author, pages, wasRead }, id) {
     );
 
     listItem.dataset.id = id;
+    listItem.className = 'book';
+    
     bookDisplay.append(listItem);
 }
 
