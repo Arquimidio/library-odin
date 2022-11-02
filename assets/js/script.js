@@ -1,6 +1,7 @@
 const storedBooks = [];
 const bookDisplay = document.querySelector('.booklist');
 
+/* Creates a book object */
 function Book(title, author, pages, wasRead) {
     this.title = title;
     this.author = author;
@@ -8,10 +9,12 @@ function Book(title, author, pages, wasRead) {
     this.wasRead = wasRead;
 }
 
+/* Adds book to the library array */
 function addBookToLibrary(book) {
     storedBooks.push(book);
 }
 
+/* Creates the necessary elements to display a book with HTML */
 function displaySingleBook({ title, author, pages, wasRead }) {
     const listItem = document.createElement('li');
     const titleH2 = document.createElement('h2');
@@ -38,6 +41,7 @@ function displaySingleBook({ title, author, pages, wasRead }) {
     listItem.append(titleH2, authorP, pagesP, wasReadLabel, wasReadBox);
 }
 
+/* Displays all the books from the given array */
 function displayBooks(bookArray) {
     bookArray.forEach(displaySingleBook);
 }
