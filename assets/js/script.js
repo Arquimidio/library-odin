@@ -39,9 +39,20 @@ function displaySingleBook({ title, author, pages, wasRead }) {
     ]
 
     listItem.append(titleH2, authorP, pagesP, wasReadLabel, wasReadBox);
+    bookDisplay.append(listItem);
 }
 
 /* Displays all the books from the given array */
 function displayBooks(bookArray) {
     bookArray.forEach(displaySingleBook);
 }
+
+const lotr = new Book(
+    'Lord of the Rings',
+    'Tolkien',
+    '1000',
+    true
+);
+
+addBookToLibrary(lotr);
+displayBooks(storedBooks);
