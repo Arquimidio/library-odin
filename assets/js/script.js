@@ -9,7 +9,7 @@ function Book(title, author, pages, wasRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.wasRead = wasRead;
+    this.wasRead = wasRead? true : false;
 }
 
 /* Adds book to the library array */
@@ -70,8 +70,19 @@ function hideBookForm() {
     bookForm.classList.add('hide');
 }
 
+/*Gets the data from the new book form and adds it as a new book to the stored books*/
+function submitBook(event) {
+    event.preventDefault();
+    const { target: form } = event;
+    const formData = new FormData(form);
+    const newBook = new Book(...formData.values());
+    addBookToLibrary(newBook);
+    displaySingleBook(newBook);
+}
+
 showForm.addEventListener('click', displayBookForm);
 hideForm.addEventListener('click', hideBookForm);
+bookForm.addEventListener('submit', submitBook);
 
 const lotr = new Book(
     'Lord of the Rings',
