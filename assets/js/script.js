@@ -1,6 +1,7 @@
 const storedBooks = [];
 const bookDisplay = document.querySelector('.booklist');
-const showForm = document.getElementById('add-book-form-btn')
+const bookForm = document.getElementById('book-form');
+const showForm = document.getElementById('add-book-form-btn');
 
 /* Creates a book object */
 function Book(title, author, pages, wasRead) {
@@ -57,6 +58,13 @@ function displaySingleBook({ title, author, pages, wasRead }) {
 function displayBooks(bookArray) {
     bookArray.forEach(displaySingleBook);
 }
+
+/* Displays the form for adding new books */
+function displayBookForm() {
+    bookForm.classList.remove('hide');
+}
+
+showForm.addEventListener('click', displayBookForm);
 
 const lotr = new Book(
     'Lord of the Rings',
