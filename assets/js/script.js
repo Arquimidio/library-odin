@@ -1,5 +1,6 @@
 const storedBooks = [];
 const bookDisplay = document.querySelector('.booklist');
+const showForm = document.getElementById('add-book-form-btn')
 
 /* Creates a book object */
 function Book(title, author, pages, wasRead) {
