@@ -2,6 +2,7 @@ const storedBooks = [];
 const bookDisplay = document.querySelector('.booklist');
 const bookForm = document.getElementById('book-form');
 const showForm = document.getElementById('add-book-form-btn');
+const hideForm = document.getElementById('close-form-btn');
 
 /* Creates a book object */
 function Book(title, author, pages, wasRead) {
@@ -64,7 +65,13 @@ function displayBookForm() {
     bookForm.classList.remove('hide');
 }
 
+/* Hides the form for adding new books */
+function hideBookForm() {
+    bookForm.classList.add('hide');
+}
+
 showForm.addEventListener('click', displayBookForm);
+hideForm.addEventListener('click', hideBookForm);
 
 const lotr = new Book(
     'Lord of the Rings',
