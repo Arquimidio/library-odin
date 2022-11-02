@@ -22,16 +22,18 @@
     </header>
     <main>
         <ul class="booklist"></ul>
-        <button id="add-book-form-btn">Add</button>
-        <form>
-            <label for="title">Title: </label>
-            <input type="text" name="title" id="title" placeholder="Lord of the Rings">
-            <label for="author">Author: </label>
-            <input type="text" name="author" id="author" placeholder="J.R.R. Tolkien">
-            <label for="num-of-pages">Pages: </label>
-            <input type="number" name="pages" id="num-of-pages">
-            <label for="was-read">Was read? </label>
-            <input type="checkbox" name="read" id="was-read">
+        <button id="add-book-form-btn">+ New</button>
+        <form class="book-form" id="book-form">
+            <div class="book-form-container">
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title" placeholder="Lord of the Rings">
+                <label for="author">Author: </label>
+                <input type="text" name="author" id="author" placeholder="J.R.R. Tolkien">
+                <label for="num-of-pages">Pages: </label>
+                <input type="number" name="pages" id="num-of-pages">
+                <label for="was-read">Was read? </label>
+                <input type="checkbox" name="read" id="was-read">
+            </div>
         </form>
     </main>
     <footer></footer>

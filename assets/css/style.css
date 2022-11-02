@@ -5,10 +5,30 @@
 }
 
 :root {
+    --modal-bg: rgba(0, 0, 0, 0.295);
+}
 
+body {
+    min-height: 100vh;
 }
 
 .booklist {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.book-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--modal-bg);
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.hide {
+    display: none;
 }
