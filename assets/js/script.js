@@ -78,6 +78,7 @@ function submitBook(event) {
     const newBook = new Book(...formData.values());
     addBookToLibrary(newBook);
     displaySingleBook(newBook);
+    hideBookForm();
 }
 
 showForm.addEventListener('click', displayBookForm);
