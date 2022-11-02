@@ -53,9 +53,10 @@ function displaySingleBook({ title, author, pages, wasRead }, id) {
         removeBook
     );
 
+    removeBook.addEventListener('click', deleteBook);
     listItem.dataset.id = id;
     listItem.className = 'book';
-    
+
     bookDisplay.append(listItem);
 }
 
@@ -84,6 +85,14 @@ function submitBook(event) {
     displaySingleBook(newBook, storedBooks.length);
     form.reset();
     hideBookForm();
+}
+
+/* Deletes selected book based on it's id in the book storage */
+function deleteBook(event) {
+    const { parentElement: book } = event.target;
+    const { id } = book.dataset;
+    storedBooks[id] = null;
+    book.remove();
 }
 
 showForm.addEventListener('click', displayBookForm);
