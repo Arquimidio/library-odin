@@ -21,6 +21,17 @@ function getCurIndex() {
     return localStorage.getItem('index');
 }
 
+/* Gets a single book from the local storage */
+function getSingleBook(id) {
+    return JSON.parse(localStorage.getItem(id));
+}
+
+/* Sets a single book in the local storage */
+function setBook(id, book) {
+    localStorage.setItem(id, JSON.stringify(book));
+    return book;
+}
+
 /* Gets all the books stored in the local storage */
 function getAllBooks() {
     return Object.entries(localStorage)
@@ -35,7 +46,7 @@ function changeIndex(newVal) {
 /* Adds book to the library array */
 function addBookToLibrary(book) {
     const newIndex = Number(getCurIndex()) + 1;
-    localStorage.setItem(newIndex, JSON.stringify(book));
+    setBook(newIndex, book);
     changeIndex(newIndex + 1);
     return newIndex;
 }
@@ -77,6 +88,8 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     );
 
     removeBook.addEventListener('click', deleteBook);
+    wasReadBox.addEventListener('input', toggleReadState);
+
     listItem.dataset.id = id;
     listItem.className = 'book';
 
@@ -116,6 +129,15 @@ function deleteBook(event) {
     const { id } = book.dataset;
     localStorage.removeItem(id);
     book.remove();
+}
+
+function toggleReadState(event) {
+    const { target: checkbox } = event;
+    const { parentElement: bookElement } = checkbox;
+    const { id } = bookElement.dataset;
+    const bookData = getSingleBook(id);
+    bookData.wasRead = checkbox.checked;
+    setBook(id, bookData);
 }
 
 showForm.addEventListener('click', displayBookForm);
