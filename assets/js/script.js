@@ -22,6 +22,7 @@ function displaySingleBook({ title, author, pages, wasRead }) {
     const pagesP = document.createElement('p');
     const wasReadLabel = document.createElement('label');
     const wasReadBox = document.createElement('input');
+    const removeBook = document.createElement('button');
 
     wasReadBox.type = 'checkbox';
     wasReadBox.checked = wasRead;
@@ -30,15 +31,24 @@ function displaySingleBook({ title, author, pages, wasRead }) {
         titleH2.textContent,
         authorP.textContent,
         pagesP.textContent,
-        wasReadLabel.textContent
+        wasReadLabel.textContent,
+        removeBook.textContent
     ] = [
         title,
         author,
         pages,
-        'Was read: '
+        'Was read: ',
+        'Delete book'
     ]
 
-    listItem.append(titleH2, authorP, pagesP, wasReadLabel, wasReadBox);
+    listItem.append(
+        titleH2, 
+        authorP, 
+        pagesP, 
+        wasReadLabel, 
+        wasReadBox, 
+        removeBook
+    );
     bookDisplay.append(listItem);
 }
 
