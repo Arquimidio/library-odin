@@ -2,6 +2,7 @@ const bookDisplay = document.querySelector('.booklist');
 const bookForm = document.getElementById('book-form');
 const showForm = document.getElementById('add-book-form-btn');
 const hideForm = document.getElementById('close-form-btn');
+const readBtn = document.getElementById('form-read-btn')
 
 /* Starts a new index for localstorage if it doesn't have one */
 if(!localStorage.getItem('index')){
@@ -14,6 +15,10 @@ function Book(title, author, pages, wasRead) {
     this.author = author;
     this.pages = pages;
     this.wasRead = wasRead? true : false;
+}
+
+function strToBol(str) {
+    return Boolean(Number(str));
 }
 
 /* Gets the current index from the local storage */
@@ -57,25 +62,26 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     const titleH2 = document.createElement('h2');
     const authorP = document.createElement('p');
     const pagesP = document.createElement('p');
-    const wasReadLabel = document.createElement('label');
-    const wasReadBox = document.createElement('input');
+    const wasReadButton = document.createElement('button');
     const removeBook = document.createElement('button');
+    const wasReadBin = Number(wasRead);
 
-    wasReadBox.type = 'checkbox';
-    wasReadBox.className = 'check-read'
-    wasReadBox.checked = wasRead;
+    wasReadButton.type = 'button';
+    wasReadButton.className = 'check-read'
+    wasReadButton.dataset.wasread = wasReadBin;
+    
 
     [
         titleH2.textContent,
         authorP.textContent,
         pagesP.textContent,
-        wasReadLabel.textContent,
+        wasReadButton.textContent,
         removeBook.textContent
     ] = [
         title,
         author,
         pages,
-        'Was read: ',
+        wasRead? 'Read' : 'Not Read',
         'Delete book'
     ]
 
@@ -83,13 +89,12 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
         titleH2, 
         authorP, 
         pagesP, 
-        wasReadLabel, 
-        wasReadBox, 
+        wasReadButton, 
         removeBook
     );
 
     removeBook.addEventListener('click', deleteBook);
-    wasReadBox.addEventListener('input', toggleReadState);
+    wasReadButton.addEventListener('click', changeReadState);
 
     listItem.dataset.id = id;
     listItem.className = 'book';
@@ -112,12 +117,31 @@ function hideBookForm() {
     bookForm.classList.add('hide');
 }
 
+/* Changes the state of the read button based on datased attribute*/
+function changeReadState(event) {
+    const { target: button } = event;
+    const { wasread } = button.dataset;
+    const readState = Number(wasread)
+    const newReadState = Number(!readState)
+    button.dataset.wasread = newReadState;
+    button.textContent = newReadState? 'Read' : 'Not Read';
+
+    if(!button.id) {
+        const { parentElement: bookElement } = button;
+        const { id } = bookElement.dataset;
+        const bookData = getSingleBook(id);
+        bookData.wasRead = Boolean(newReadState);
+        setBook(id, bookData);
+    }
+}
+
 /*Gets the data from the new book form and adds it as a new book to the stored books*/
 function submitBook(event) {
     event.preventDefault();
     const { target: form } = event;
     const formData = new FormData(form);
-    const newBook = new Book(...formData.values());
+    const readState = readBtn.dataset.wasread;
+    const newBook = new Book(...formData.values(), strToBol(readState));
     const index = addBookToLibrary(newBook);
     displaySingleBook([index, newBook]);
     form.reset();
@@ -132,17 +156,9 @@ function deleteBook(event) {
     book.remove();
 }
 
-function toggleReadState(event) {
-    const { target: checkbox } = event;
-    const { parentElement: bookElement } = checkbox;
-    const { id } = bookElement.dataset;
-    const bookData = getSingleBook(id);
-    bookData.wasRead = checkbox.checked;
-    setBook(id, bookData);
-}
-
 showForm.addEventListener('click', displayBookForm);
 hideForm.addEventListener('click', hideBookForm);
 bookForm.addEventListener('submit', submitBook);
+readBtn.addEventListener('click', changeReadState);
 
 displayBooks(getAllBooks());
