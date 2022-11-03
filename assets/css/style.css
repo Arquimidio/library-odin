@@ -15,6 +15,7 @@
     --light-font: #fff;
 
     --bradius-s: 5px;
+    --bradius-circle: 50%;
 }
 
 header {
@@ -26,6 +27,10 @@ body {
     min-height: 100vh;
     background-color: var(--main-bg);
     font-family: sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
 }
 
 button {
@@ -132,10 +137,15 @@ label {
 }
 
 .new-btn {
+    font-size: 1.8rem;
     width: fit-content;
     position: fixed;
     right: 20px;
     bottom: 20px;
+    border-radius: var(--bradius-circle);
+    padding: .2em .5em;
+    background-color: var(--header-bg);
+    color: var(--light-font);
 }
 
 .close-form-btn {
