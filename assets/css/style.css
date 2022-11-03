@@ -27,7 +27,6 @@ ul {
     list-style-type: none;
 }
 
-
 .container {
     width: 95%;
     max-width: 1300px;
@@ -44,10 +43,15 @@ ul {
     justify-content: space-between;
 }
 
-
 .booklist {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.book {
+    text-align: center;
+    border: 1px solid black;
 }
 
 .book-form {
