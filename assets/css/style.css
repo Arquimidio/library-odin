@@ -11,6 +11,7 @@
     --book-bg: #fff;
     --read-bg: rgb(73, 238, 114);
     --not-read-bg: rgb(230, 82, 82);
+    --light-btn-bg: rgb(223, 223, 223);
     --light-font: #fff;
 
     --bradius-s: 5px;
@@ -34,6 +35,7 @@ button {
    border: none;
    font-weight: bold;
    transition: filter 200ms;
+   background-color: var(--light-btn-bg);
 }
 
 button:hover {
@@ -78,7 +80,7 @@ label {
 .booklist {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
 }
 
 .book {
