@@ -32,10 +32,16 @@ button {
    border-radius: var(--bradius-s);
    border: none;
    font-weight: bold;
+   transition: filter 200ms;
 }
 
 button:hover {
+    transition: filter 200ms;
     filter: brightness(.95);
+}
+
+button:active {
+    transform: scale(.99);
 }
 
 ul {
