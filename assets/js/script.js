@@ -80,7 +80,7 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     ] = [
         title,
         author,
-        pages,
+        `${pages} pages`,
         wasRead? 'Read' : 'Not Read',
         'Delete book'
     ]
