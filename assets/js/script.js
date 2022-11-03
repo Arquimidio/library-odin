@@ -62,6 +62,7 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     const removeBook = document.createElement('button');
 
     wasReadBox.type = 'checkbox';
+    wasReadBox.className = 'check-read'
     wasReadBox.checked = wasRead;
 
     [

@@ -5,16 +5,45 @@
 }
 
 :root {
-    --modal-bg: rgba(0, 0, 0, 0.295);
+    --header-bg: #fff;
+    --main-bg: rgba(26, 26, 26, 0.233);
+    --modal-bg: rgba(43, 43, 43, 0.562);
+}
+
+header {
+    background-color: var(--header-bg);
 }
 
 body {
     min-height: 100vh;
+    background-color: var(--main-bg);
 }
 
 button {
     cursor: pointer;
 }
+
+ul {
+    list-style-type: none;
+}
+
+
+.container {
+    width: 95%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.padv-2 {
+    padding: 2rem 0;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 .booklist {
     display: grid;
@@ -31,6 +60,12 @@ button {
     height: 100%;
     top: 0;
     left: 0;
+}
+
+.new-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
 }
 
 .hide {
