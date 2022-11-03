@@ -52,6 +52,11 @@ ul {
 .book {
     text-align: center;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    word-wrap: break-word;
 }
 
 .book-form {
