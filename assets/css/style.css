@@ -5,13 +5,20 @@
 }
 
 :root {
-    --header-bg: #fff;
-    --main-bg: rgba(26, 26, 26, 0.233);
+    --header-bg: #6C4AB6;
+    --main-bg: #8D72E1;
     --modal-bg: rgba(43, 43, 43, 0.562);
+    --book-bg: #fff;
+    --read-bg: rgb(73, 238, 114);
+    --not-read-bg: rgb(230, 82, 82);
+    --light-font: #fff;
+
+    --bradius-s: 5px;
 }
 
 header {
     background-color: var(--header-bg);
+    color: var(--light-font);
 }
 
 body {
@@ -20,7 +27,15 @@ body {
 }
 
 button {
-    cursor: pointer;
+   cursor: pointer;
+   padding: .5rem 1rem;
+   border-radius: var(--bradius-s);
+   border: none;
+   font-weight: bold;
+}
+
+button:hover {
+    filter: brightness(.95);
 }
 
 ul {
@@ -37,6 +52,7 @@ ul {
     padding: 2rem 0;
 }
 
+
 .nav-items {
     display: flex;
     align-items: center;
@@ -51,7 +67,8 @@ ul {
 
 .book {
     text-align: center;
-    border: 1px solid black;
+    background-color: var(--book-bg);
+    border-radius: var(--bradius-s);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -59,6 +76,11 @@ ul {
     flex-grow: 1;
     word-wrap: break-word;
     gap: 1rem;
+    padding: 1rem;
+}
+
+.book button {
+    width: 100%;
 }
 
 .book-form {
@@ -73,7 +95,22 @@ ul {
     left: 0;
 }
 
+.book-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+[data-wasread="0"] {
+    background-color: var(--not-read-bg);
+}
+
+[data-wasread="1"] {
+    background-color: var(--read-bg);
+}
+
 .new-btn {
+    width: fit-content;
     position: fixed;
     right: 20px;
     bottom: 20px;

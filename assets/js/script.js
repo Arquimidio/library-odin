@@ -117,7 +117,7 @@ function hideBookForm() {
     bookForm.classList.add('hide');
 }
 
-/* Changes the state of the read button based on datased attribute*/
+/* Changes the state of the read button based on dataset attribute*/
 function changeReadState(event) {
     const { target: button } = event;
     const { wasread } = button.dataset;
