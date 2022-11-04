@@ -50,6 +50,11 @@ function changeIndex(newVal) {
     localStorage.setItem('index', newVal);
 }
 
+/* Returns the reading state of a book based on a given boolean */
+function getReadText(bool) {
+    return bool? 'Read' : 'Not Read';
+}
+
 /* Adds book to the library array */
 function addBookToLibrary(book) {
     const newIndex = Number(getCurIndex()) + 1;
@@ -84,8 +89,8 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
         title,
         author,
         `${pages} pages`,
-        wasRead? 'Read' : 'Not Read',
-        'Delete book'
+        getReadText(wasRead),
+        'Delete'
     ]
 
     listItem.append(
@@ -134,7 +139,7 @@ function changeReadState(event) {
     const readState = Number(wasread)
     const newReadState = Number(!readState)
     button.dataset.wasread = newReadState;
-    button.textContent = newReadState? 'Read' : 'Not Read';
+    button.textContent = getReadText(newReadState);
 
     if(!button.id) {
         const { parentElement: bookElement } = button;
