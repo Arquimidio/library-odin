@@ -5,13 +5,13 @@
 }
 
 :root {
-    --header-bg: #6C4AB6;
-    --main-bg: #8D72E1;
+    --header-bg: #153462;
+    --main-bg: #BAD1C2;
     --modal-bg: rgba(43, 43, 43, 0.562);
-    --book-bg: #fff;
+    --book-bg: #F6F6C9;
     --read-bg: rgb(73, 238, 114);
     --not-read-bg: rgb(230, 82, 82);
-    --light-btn-bg: rgb(223, 223, 223);
+    --light-btn-bg: #BAD1C2;
     --light-font: #fff;
 
     --bradius-s: 4px;
@@ -32,7 +32,7 @@ body {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 button {
