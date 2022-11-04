@@ -16,6 +16,8 @@
 
     --bradius-s: 5px;
     --bradius-circle: 50%;
+
+    --main-font: 'Inter', sans-serif;
 }
 
 header {
@@ -26,7 +28,7 @@ header {
 body {
     min-height: 100vh;
     background-color: var(--main-bg);
-    font-family: sans-serif;
+    font-family: var(--main-font);
 }
 
 h1 {
