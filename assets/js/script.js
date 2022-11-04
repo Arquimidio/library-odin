@@ -119,6 +119,13 @@ function hideBookForm() {
     bookForm.classList.add('hide');
 }
 
+/* Hides the form when the users click out of the form area*/
+function hideBookFormOnClickOut(event) {
+    if(event.target === event.currentTarget) {
+        hideBookForm();
+    } 
+}
+
 /* Changes the state of the read button based on dataset attribute*/
 function changeReadState(event) {
     const { target: button } = event;
@@ -161,6 +168,7 @@ function deleteBook(event) {
 showForm.addEventListener('click', displayBookForm);
 hideForm.addEventListener('click', hideBookForm);
 bookForm.addEventListener('submit', submitBook);
+bookForm.addEventListener('click', hideBookFormOnClickOut)
 readBtn.addEventListener('click', changeReadState);
 
 displayBooks(getAllBooks());
