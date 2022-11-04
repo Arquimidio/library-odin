@@ -17,6 +17,7 @@ function Book(title, author, pages, wasRead) {
     this.wasRead = wasRead? true : false;
 }
 
+/* Transforms a number inside a string into a boolean (mainly to be used with 0 and 1)*/
 function strToBol(str) {
     return Boolean(Number(str));
 }
@@ -44,6 +45,7 @@ function getAllBooks() {
         .map(entry => [entry[0], JSON.parse(entry[1])]);
 }
 
+/* Changes localStorage index to an updated value */
 function changeIndex(newVal) {
     localStorage.setItem('index', newVal);
 }
