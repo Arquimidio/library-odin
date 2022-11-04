@@ -14,7 +14,7 @@
     --light-btn-bg: rgb(223, 223, 223);
     --light-font: #fff;
 
-    --bradius-s: 5px;
+    --bradius-s: 4px;
     --bradius-circle: 50%;
 
     --main-font: 'Inter', sans-serif;
@@ -106,6 +106,10 @@ label {
 
 .book button {
     width: 100%;
+}
+
+.author {
+    font-style: italic;
 }
 
 .book-form {

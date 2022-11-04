@@ -68,6 +68,7 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     const removeBook = document.createElement('button');
     const wasReadBin = Number(wasRead);
 
+    authorP.className = 'author';
     wasReadButton.type = 'button';
     wasReadButton.className = 'check-read'
     wasReadButton.dataset.wasread = wasReadBin;
