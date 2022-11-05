@@ -24,6 +24,7 @@ function makeElement({
 }) {
   const newElement = document.createElement(type);
   const newElementSetProps = setPropsFromArr.bind(newElement, newElement);
+  
   Object.entries(dataset)
     .forEach(newElementSetProps((elt, prop, val) => elt.dataset[prop] = val));
   Object.entries(attr)
