@@ -17,10 +17,11 @@ function makeElement({
   parent = null,
   className = '',
   id = '',
-  text,
+  text = '',
   attributes = {},
   dataset = {},
-  listeners = {}
+  listeners = {},
+  children = []
 }) {
   const newElement = document.createElement(type);
   const newElementSetProps = setPropsFromArr.bind(newElement, newElement);
@@ -35,7 +36,16 @@ function makeElement({
   Object.entries(listeners)
     .forEach(newElementSetProps('addEventListener'));
 
-  newElement.textContent = text;
+  if(children.length) {
+    if(children[0] instanceof HTMLElement) {
+      newElement.append(...children);
+    }else {
+      newElement.append(...children.map(makeElement));
+    }
+  }
+  
+
+  newElement.append(document.createTextNode(text));
 
   if (parent) {
     parent.append(newElement);

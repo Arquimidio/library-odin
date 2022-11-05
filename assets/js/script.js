@@ -69,36 +69,35 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     const titleH2 = makeElement({ type: 'h2', text: title });
     const authorP = makeElement({ type: 'p', text: author, className: 'author' });
     const pagesP = makeElement({ type: 'p', text: `${pages} pages` });
-
-    const listItem = makeElement({ 
-        type: 'li', 
-        parent: bookDisplay,
-        dataset: { id },
-        className: 'book'
-    });
-
     const wasReadButton = makeElement({
         type: 'button',
         className: 'check-read',
-        dataset: { wasRead: Number(wasRead) },
+        dataset: { wasread: Number(wasRead) },
         text: getReadText(wasRead),
         listeners: { click: changeReadState }
     });
-
     const removeBook = makeElement({
         type: 'button',
         text: 'Delete',
         listeners: { click: deleteBook }
     });
 
+    const book = makeElement({ 
+        type: 'li', 
+        parent: bookDisplay,
+        dataset: { id },
+        className: 'book',
+        children: [
+            titleH2,
+            authorP,
+            pagesP,
+            wasReadButton,
+            removeBook
+        ]
+    });
 
-    listItem.append(
-        titleH2, 
-        authorP, 
-        pagesP, 
-        wasReadButton, 
-        removeBook
-    );
+    return book;
+
 }
 
 /* Displays all the books from the given array */
