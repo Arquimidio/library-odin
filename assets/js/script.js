@@ -66,33 +66,31 @@ function addBookToLibrary(book) {
 
 /* Creates the necessary elements to display a book with HTML */
 function displaySingleBook([id, { title, author, pages, wasRead }]) {
-    const listItem = document.createElement('li');
-    const titleH2 = document.createElement('h2');
-    const authorP = document.createElement('p');
-    const pagesP = document.createElement('p');
-    const wasReadButton = document.createElement('button');
-    const removeBook = document.createElement('button');
-    const wasReadBin = Number(wasRead);
-
-    authorP.className = 'author';
-    wasReadButton.type = 'button';
-    wasReadButton.className = 'check-read'
-    wasReadButton.dataset.wasread = wasReadBin;
+    const titleH2 = makeElement({ type: 'h2', text: title });
+    const authorP = makeElement({ type: 'p', text: author, className: 'author' });
+    const pagesP = makeElement({ type: 'p', text: `${pages} pages` });
     
+    const listItem = makeElement({ 
+        type: 'li', 
+        parent: bookDisplay,
+        dataset: [['id', id]],
+        className: 'book'
+    });
 
-    [
-        titleH2.textContent,
-        authorP.textContent,
-        pagesP.textContent,
-        wasReadButton.textContent,
-        removeBook.textContent
-    ] = [
-        title,
-        author,
-        `${pages} pages`,
-        getReadText(wasRead),
-        'Delete'
-    ]
+    const wasReadButton = makeElement({
+        type: 'button',
+        className: 'check-read',
+        dataset: [['wasread', Number(wasRead)]],
+        text: getReadText(wasRead),
+        listeners: [['click', changeReadState]]
+    });
+
+    const removeBook = makeElement({
+        type: 'button',
+        text: 'Delete',
+        listeners: [['click', deleteBook]]
+    });
+
 
     listItem.append(
         titleH2, 
@@ -101,14 +99,6 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
         wasReadButton, 
         removeBook
     );
-
-    removeBook.addEventListener('click', deleteBook);
-    wasReadButton.addEventListener('click', changeReadState);
-
-    listItem.dataset.id = id;
-    listItem.className = 'book';
-
-    bookDisplay.append(listItem);
 }
 
 /* Displays all the books from the given array */
