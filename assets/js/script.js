@@ -66,38 +66,32 @@ function addBookToLibrary(book) {
 
 /* Creates the necessary elements to display a book with HTML */
 function displaySingleBook([id, { title, author, pages, wasRead }]) {
-    const titleH2 = makeElement({ type: 'h2', text: title });
-    const authorP = makeElement({ type: 'p', text: author, className: 'author' });
-    const pagesP = makeElement({ type: 'p', text: `${pages} pages` });
-    const wasReadButton = makeElement({
-        type: 'button',
-        className: 'check-read',
-        dataset: { wasread: Number(wasRead) },
-        text: getReadText(wasRead),
-        listeners: { click: changeReadState }
-    });
-    const removeBook = makeElement({
-        type: 'button',
-        text: 'Delete',
-        listeners: { click: deleteBook }
-    });
 
-    const book = makeElement({ 
+    makeElement({ 
         type: 'li', 
         parent: bookDisplay,
         dataset: { id },
         className: 'book',
         children: [
-            titleH2,
-            authorP,
-            pagesP,
-            wasReadButton,
-            removeBook
+            { type: 'h2', text: title },
+            { type: 'p', text: author, className: 'author' },
+            { type: 'p', text: `${pages} pages` },
+            {
+                type: 'button',
+                className: 'check-read',
+                dataset: { wasread: Number(wasRead) },
+                text: getReadText(wasRead),
+                listeners: { click: changeReadState }
+            },
+            {
+                type: 'button',
+                text: 'Delete',
+                listeners: { click: deleteBook }
+            }
         ]
-    });
+    })
 
     return book;
-
 }
 
 /* Displays all the books from the given array */
