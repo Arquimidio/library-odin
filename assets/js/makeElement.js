@@ -15,26 +15,23 @@ function setPropsFromArr(element, cb) {
 function makeElement({
   type = 'p',
   parent = null,
-  className = '',
-  id = '',
   text = '',
-  attributes = {},
+  properties = {},
+  attr = {},
   dataset = {},
   listeners = {},
   children = []
 }) {
   const newElement = document.createElement(type);
   const newElementSetProps = setPropsFromArr.bind(newElement, newElement);
-
-  newElement.className = className;
-  newElement.id = id;
-  
   Object.entries(dataset)
     .forEach(newElementSetProps((elt, prop, val) => elt.dataset[prop] = val));
-  Object.entries(attributes)
+  Object.entries(attr)
     .forEach(newElementSetProps('setAttribute'));
   Object.entries(listeners)
     .forEach(newElementSetProps('addEventListener'));
+  Object.entries(properties)
+    .forEach(newElementSetProps((elt, prop, val) => elt[prop] = val))
 
   if(children.length) {
     if(children[0] instanceof HTMLElement) {
@@ -43,7 +40,6 @@ function makeElement({
       newElement.append(...children.map(makeElement));
     }
   }
-  
 
   newElement.append(document.createTextNode(text));
 

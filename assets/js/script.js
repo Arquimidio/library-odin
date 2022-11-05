@@ -66,19 +66,18 @@ function addBookToLibrary(book) {
 
 /* Creates the necessary elements to display a book with HTML */
 function displaySingleBook([id, { title, author, pages, wasRead }]) {
-
-    makeElement({ 
+    const book = makeElement({ 
         type: 'li', 
         parent: bookDisplay,
         dataset: { id },
-        className: 'book',
+        attr: { class: 'book' },
         children: [
             { type: 'h2', text: title },
-            { type: 'p', text: author, className: 'author' },
+            { type: 'p', text: author, attr: { class: 'author' } },
             { type: 'p', text: `${pages} pages` },
             {
                 type: 'button',
-                className: 'check-read',
+                attr: { class: 'check-read' },
                 dataset: { wasread: Number(wasRead) },
                 text: getReadText(wasRead),
                 listeners: { click: changeReadState }
@@ -90,7 +89,6 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
             }
         ]
     })
-
     return book;
 }
 
