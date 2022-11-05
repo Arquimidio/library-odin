@@ -72,9 +72,19 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
         dataset: { id },
         attr: { class: 'book' },
         children: [
-            { type: 'h2', text: title },
-            { type: 'p', text: author, attr: { class: 'author' } },
-            { type: 'p', text: `${pages} pages` },
+            { 
+                type: 'h2', 
+                text: title 
+            },
+            { 
+                type: 'p', 
+                text: author, 
+                attr: { class: 'author' } 
+            },
+            { 
+                type: 'p', 
+                text: `${pages} pages` 
+            },
             {
                 type: 'button',
                 attr: { class: 'check-read' },
