@@ -69,26 +69,26 @@ function displaySingleBook([id, { title, author, pages, wasRead }]) {
     const titleH2 = makeElement({ type: 'h2', text: title });
     const authorP = makeElement({ type: 'p', text: author, className: 'author' });
     const pagesP = makeElement({ type: 'p', text: `${pages} pages` });
-    
+
     const listItem = makeElement({ 
         type: 'li', 
         parent: bookDisplay,
-        dataset: [['id', id]],
+        dataset: { id },
         className: 'book'
     });
 
     const wasReadButton = makeElement({
         type: 'button',
         className: 'check-read',
-        dataset: [['wasread', Number(wasRead)]],
+        dataset: { wasRead: Number(wasRead) },
         text: getReadText(wasRead),
-        listeners: [['click', changeReadState]]
+        listeners: { click: changeReadState }
     });
 
     const removeBook = makeElement({
         type: 'button',
         text: 'Delete',
-        listeners: [['click', deleteBook]]
+        listeners: { click: deleteBook }
     });
 
 

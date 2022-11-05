@@ -7,7 +7,6 @@ function setPropsFromArr(element, cb) {
     if(typeof cb === 'string'){
       element[cb].call(element, prop, val);
     } else {
-      
       cb(element, prop, val);
     }
   }
@@ -19,9 +18,9 @@ function makeElement({
   className = '',
   id = '',
   text,
-  attributes = [],
-  dataset = [],
-  listeners = []
+  attributes = {},
+  dataset = {},
+  listeners = {}
 }) {
   const newElement = document.createElement(type);
   const newElementSetProps = setPropsFromArr.bind(newElement, newElement);
@@ -29,9 +28,13 @@ function makeElement({
   newElement.className = className;
   newElement.id = id;
   
-  dataset.forEach(newElementSetProps((elt, prop, val) => elt.dataset[prop] = val));
-  attributes.forEach(newElementSetProps('setAttribute'));
-  listeners.forEach(newElementSetProps('addEventListener'));
+  Object.entries(dataset)
+    .forEach(newElementSetProps((elt, prop, val) => elt.dataset[prop] = val));
+  Object.entries(attributes)
+    .forEach(newElementSetProps('setAttribute'));
+  Object.entries(listeners)
+    .forEach(newElementSetProps('addEventListener'));
+
   newElement.textContent = text;
 
   if (parent) {
