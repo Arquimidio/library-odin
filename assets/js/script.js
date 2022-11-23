@@ -1,5 +1,4 @@
 import makeElement from "./makeElement.js";
-const bookDisplay = document.querySelector('.booklist');
 const bookForm = document.getElementById('book-form');
 const showForm = document.getElementById('add-book-form-btn');
 const hideForm = document.getElementById('close-form-btn');
@@ -10,45 +9,79 @@ if(!localStorage.getItem('index')){
     localStorage.setItem('index', 0);
 }
 
-/* Creates a book object */
-function Book(title, author, pages, wasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.wasRead = wasRead? true : false;
+/* Creates a book object using a class */
+class Book {
+    constructor(title, author, pages, wasRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.wasRead = wasRead? true : false;
+    }
 }
 
-/* Transforms a number inside a string into a boolean (mainly to be used with 0 and 1)*/
-function strToBol(str) {
-    return Boolean(Number(str));
+class BookStorage {
+
+    constructor() {
+        this.storage = localStorage;
+    }
+
+    /* Transforms a number inside a string into a boolean (mainly to be used with 0 and 1)*/
+    strToBol(str) {
+        return Boolean(Number(str));
+    }
+
+    /* Gets the current index from the local storage */
+    getCurIndex() {
+        return storage.getItem('index');
+    }
+
+    /* Gets a single book from the local storage */
+    getSingleBook(id) {
+        return JSON.parse(storage.getItem(id));
+    }
+
+    parseBook([prop, val]) {
+        return [prop, JSON.parse(val)];
+    }
+
+    filterBookEntries([prop]) {
+        return prop !== 'index';
+    }
+
+    getBookEntries() {
+        const entries = Object.entries(storage);
+        return entries.filter(([prop]) => prop !== 'index');
+    }
+
+    getAllBooks() {
+        const entries = ;
+        const bookEntries = ;
+        const books = bookEntries.map(this.parseBook.bind(this));
+        return books;
+    }
+
+    /* Gets all the books stored in the local storage */
+    setBook(id, book) {
+        storage.setItem(id, JSON.stringify(book));
+        return book;
+    }
+
+    /* Changes localStorage index to an updated value */
+    changeIndex(newVal) {
+        storage.setItem('index', newVal);
+    }
+    
 }
 
-/* Gets the current index from the local storage */
-function getCurIndex() {
-    return localStorage.getItem('index');
-}
+class Library {
+    constructor() {
+        this.Storage = new BookStorage();
+        this.bookDisplay = document.querySelector('.booklist');
+    }
 
-/* Gets a single book from the local storage */
-function getSingleBook(id) {
-    return JSON.parse(localStorage.getItem(id));
-}
+    
 
-/* Sets a single book in the local storage */
-function setBook(id, book) {
-    localStorage.setItem(id, JSON.stringify(book));
-    return book;
-}
-
-/* Gets all the books stored in the local storage */
-function getAllBooks() {
-    return Object.entries(localStorage)
-        .filter(entry => entry[0] !== 'index')
-        .map(entry => [entry[0], JSON.parse(entry[1])]);
-}
-
-/* Changes localStorage index to an updated value */
-function changeIndex(newVal) {
-    localStorage.setItem('index', newVal);
+    
 }
 
 /* Returns the reading state of a book based on a given boolean */
