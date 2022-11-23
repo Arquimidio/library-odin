@@ -62,17 +62,30 @@ class BookStorage {
         return books;
     }
 
-    /* Gets all the books stored in the local storage */
+    /* Adds book to the localStorage */
     setBook(id, book) {
         storage.setItem(id, JSON.stringify(book));
         return book;
+    }
+
+    /* Creates an index for the book, stores it in the localStorage and updates the current index */
+    storeBook(book) {
+        const newIndex = Number(this.storage.getCurIndex()) + 1;
+        this.storage.setBook(newIndex, book);
+        this.storage.changeIndex(newIndex + 1);
+        return newIndex;
     }
 
     /* Changes localStorage index to an updated value */
     changeIndex(newVal) {
         storage.setItem('index', newVal);
     }
-    
+}
+
+class BookForm {
+    constructor() {
+
+    }
 }
 
 class Library {
@@ -81,65 +94,53 @@ class Library {
         this.bookDisplay = document.querySelector('.booklist');
     }
 
-    
+    /* Creates the necessary elements to display a book with HTML */
+    displaySingleBook([id, { title, author, pages, wasRead }]) {
+        const book = makeElement({ 
+            type: 'li', 
+            parent: bookDisplay,
+            dataset: { id },
+            attr: { class: 'book' },
+            children: [
+                { 
+                    type: 'h2', 
+                    text: title 
+                },
+                { 
+                    type: 'p', 
+                    text: author, 
+                    attr: { class: 'author' } 
+                },
+                { 
+                    type: 'p', 
+                    text: `${pages} pages` 
+                },
+                {
+                    type: 'button',
+                    attr: { class: 'check-read' },
+                    dataset: { wasread: Number(wasRead) },
+                    text: getReadText(wasRead),
+                    listeners: { click: changeReadState }
+                },
+                {
+                    type: 'button',
+                    text: 'Delete',
+                    listeners: { click: deleteBook }
+                }
+            ]
+        })
+        return book;
+    }
 
-    
+    /* Displays all the books from the given array */
+    displayBooks(bookArray) {
+        bookArray.forEach(displaySingleBook);
+    }
 }
 
 /* Returns the reading state of a book based on a given boolean */
 function getReadText(bool) {
     return bool? 'Read' : 'Not Read';
-}
-
-/* Adds book to the library array */
-function addBookToLibrary(book) {
-    const newIndex = Number(getCurIndex()) + 1;
-    setBook(newIndex, book);
-    changeIndex(newIndex + 1);
-    return newIndex;
-}
-
-/* Creates the necessary elements to display a book with HTML */
-function displaySingleBook([id, { title, author, pages, wasRead }]) {
-    const book = makeElement({ 
-        type: 'li', 
-        parent: bookDisplay,
-        dataset: { id },
-        attr: { class: 'book' },
-        children: [
-            { 
-                type: 'h2', 
-                text: title 
-            },
-            { 
-                type: 'p', 
-                text: author, 
-                attr: { class: 'author' } 
-            },
-            { 
-                type: 'p', 
-                text: `${pages} pages` 
-            },
-            {
-                type: 'button',
-                attr: { class: 'check-read' },
-                dataset: { wasread: Number(wasRead) },
-                text: getReadText(wasRead),
-                listeners: { click: changeReadState }
-            },
-            {
-                type: 'button',
-                text: 'Delete',
-                listeners: { click: deleteBook }
-            }
-        ]
-    })
-    return book;
-}
-
-/* Displays all the books from the given array */
-function displayBooks(bookArray) {
-    bookArray.forEach(displaySingleBook);
 }
 
 /* Displays the form for adding new books */
