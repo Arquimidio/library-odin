@@ -15,11 +15,6 @@ export default class Storage {
     return Number(this.getCurIndex()) + 1;
    }
 
-  /* Gets a single book from the local storage */
-  static getSingleBook(id) {
-      return JSON.parse(localStorage.getItem(id));
-  }
-
   /* Parses received book from localStorage to JSON */
   static parseBook([prop, val]) {
       return [prop, JSON.parse(val)];
@@ -29,6 +24,12 @@ export default class Storage {
   static filterBookEntries([prop]) {
       return prop !== 'index';
   }
+
+  
+    /* Gets a single book from the local storage */
+    static getSingleBook(id) {
+        return JSON.parse(localStorage.getItem(id));
+    }
 
   /* Gets filtered book entries (removing index entry) from localStorage */
   static getBookEntries() {
@@ -42,6 +43,8 @@ export default class Storage {
       const books = bookEntries.map(this.parseBook.bind(this));
       return books;
   }
+
+  
 
   /* Adds book to the localStorage */
   static setBook(id, book) {
