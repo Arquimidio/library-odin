@@ -11,15 +11,36 @@ export default class Library {
       this.LibForm = new Form();
 
       this.displayBooks(Storage.getAllBooks());
+      this.LibForm.form.addEventListener('submit', this.addBook.bind(this));
   }
 
-  changeBookReadState(event) {
-    const { target: button } = event;
-    const { parentElement: bookElement } = button;
-    const { id } = bookElement.dataset;
-    Storage.toggleProp('wasRead', id);
-    this.LibForm.changeReadState(event);
-  }
+  /*Gets the data from the new book form and adds it as a new book to the stored books*/
+    addBook(event) {
+        event.preventDefault();
+        const { target: form } = event;
+        const formData = new FormData(form);
+        const readState = this.LibForm.readBtn.dataset.wasread;
+        const newBook = new Book(...formData.values(), Helper.strToBol(readState));
+        const index = Storage.storeBook(newBook);
+        this.displaySingleBook([index, newBook]);
+        this.LibForm.form.reset();
+        this.LibForm.hideBookForm();
+    }
+
+    deleteBook(event) {
+        const { parentElement: book } = event.target;
+        const { id } = book.dataset;
+        Storage.removeBook(id);
+        book.remove();
+    }
+
+    changeBookReadState(event) {
+        const { target: button } = event;
+        const { parentElement: bookElement } = button;
+        const { id } = bookElement.dataset;
+        Storage.toggleProp('wasRead', id);
+        this.LibForm.changeReadState(event);
+    }
 
   /* Creates the necessary elements to display a book with HTML */
   displaySingleBook([id, { title, author, pages, wasRead }]) {
@@ -63,12 +84,5 @@ export default class Library {
   /* Displays all the books from the given array */
   displayBooks(bookArray) {
       bookArray.forEach(this.displaySingleBook.bind(this));
-  }
-
-  deleteBook(event) {
-      const { parentElement: book } = event.target;
-      const { id } = book.dataset;
-      Storage.removeBook(id);
-      book.remove();
   }
 }

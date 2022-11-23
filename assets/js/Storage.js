@@ -5,10 +5,6 @@ export default class Storage {
         localStorage.setItem('index', 0);
     }
   }
-  /* Transforms a number inside a string into a boolean (mainly to be used with 0 and 1)*/
-  static strToBol(str) {
-      return Boolean(Number(str));
-  }
 
   /* Gets the current index from the local storage */
   static getCurIndex() {
@@ -49,26 +45,26 @@ export default class Storage {
       return book;
   }
 
-  static toggleProp(propName, itemId) {
-    const bookData = this.getSingleBook(itemId);
-    bookData[propName] = !bookData[propName];
-    this.setBook(itemId, bookData);
-  }
+   /* Changes localStorage index to an updated value */
+   static changeIndex(newVal) {
+    localStorage.setItem('index', newVal);
+}
 
-  static removeBook(id) {
-      localStorage.removeItem(id);
-  }
+    /* Creates an index for the book, stores it in the localStorage and updates the current index */
+    static storeBook(book) {
+        const newIndex = Number(this.getCurIndex()) + 1;
+        this.setBook(newIndex, book);
+        this.changeIndex(newIndex + 1);
+        return newIndex;
+    }
 
-  /* Creates an index for the book, stores it in the localStorage and updates the current index */
-  static storeBook(book) {
-      const newIndex = Number(localStorage.getCurIndex()) + 1;
-      localStorage.setBook(newIndex, book);
-      localStorage.changeIndex(newIndex + 1);
-      return newIndex;
-  }
+    static removeBook(id) {
+        localStorage.removeItem(id);
+    }
 
-  /* Changes localStorage index to an updated value */
-  static changeIndex(newVal) {
-      localStorage.setItem('index', newVal);
-  }
+    static toggleProp(propName, itemId) {
+        const bookData = this.getSingleBook(itemId);
+        bookData[propName] = !bookData[propName];
+        this.setBook(itemId, bookData);
+    }
 }
