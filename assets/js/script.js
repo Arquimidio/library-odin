@@ -20,7 +20,6 @@ class Book {
 }
 
 class BookStorage {
-
     constructor() {
         this.storage = localStorage;
     }
@@ -40,22 +39,25 @@ class BookStorage {
         return JSON.parse(storage.getItem(id));
     }
 
+    /* Parses received book from localStorage to JSON */
     parseBook([prop, val]) {
         return [prop, JSON.parse(val)];
     }
 
+    /* Filter the received book entries (removing the index entry)*/
     filterBookEntries([prop]) {
         return prop !== 'index';
     }
 
+    /* Gets filtered book entries (removing index entry) from localStorage */
     getBookEntries() {
-        const entries = Object.entries(storage);
-        return entries.filter(([prop]) => prop !== 'index');
+        const entries = Object.entries(this.storage);
+        return entries.filter(this.filterBookEntries.bind(this));
     }
 
+    /* Gets all books already parsed from the localStorage */
     getAllBooks() {
-        const entries = ;
-        const bookEntries = ;
+        const bookEntries = this.getBookEntries();
         const books = bookEntries.map(this.parseBook.bind(this));
         return books;
     }
