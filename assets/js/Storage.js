@@ -1,4 +1,10 @@
 export default class Storage {
+  constructor() {
+    /* Starts a new index for localstorage if it doesn't have one */
+    if(!localStorage.getItem('index')){
+        localStorage.setItem('index', 0);
+    }
+  }
   /* Transforms a number inside a string into a boolean (mainly to be used with 0 and 1)*/
   static strToBol(str) {
       return Boolean(Number(str));

@@ -1,33 +1,8 @@
-const bookForm = document.getElementById('book-form');
-const showForm = document.getElementById('add-book-form-btn');
-const hideForm = document.getElementById('close-form-btn');
-const readBtn = document.getElementById('form-read-btn')
 
-/* Starts a new index for localstorage if it doesn't have one */
-if(!localStorage.getItem('index')){
-    localStorage.setItem('index', 0);
-}
 
 /* Returns the reading state of a book based on a given boolean */
 function getReadText(bool) {
     return bool? 'Read' : 'Not Read';
-}
-
-/* Displays the form for adding new books */
-function displayBookForm() {
-    bookForm.classList.remove('hide');
-}
-
-/* Hides the form for adding new books */
-function hideBookForm() {
-    bookForm.classList.add('hide');
-}
-
-/* Hides the form when the users click out of the form area*/
-function hideBookFormOnClickOut(event) {
-    if(event.target === event.currentTarget) {
-        hideBookForm();
-    } 
 }
 
 /* Changes the state of the read button based on dataset attribute*/

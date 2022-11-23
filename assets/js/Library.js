@@ -1,5 +1,6 @@
 import Book from './Book.js'
 import Storage from './Storage.js'
+import Form from './Form.js'
 import makeElement from './makeElement.js';
 
 export default class Library {
