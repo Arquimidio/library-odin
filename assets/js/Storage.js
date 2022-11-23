@@ -11,6 +11,10 @@ export default class Storage {
       return localStorage.getItem('index');
   }
 
+  static nextIndex() {
+    return Number(this.getCurIndex()) + 1;
+   }
+
   /* Gets a single book from the local storage */
   static getSingleBook(id) {
       return JSON.parse(localStorage.getItem(id));
@@ -45,16 +49,16 @@ export default class Storage {
       return book;
   }
 
-   /* Changes localStorage index to an updated value */
-   static changeIndex(newVal) {
-    localStorage.setItem('index', newVal);
-}
+    /* Changes localStorage index to an updated value */
+    static updateIndex(index) {
+        localStorage.setItem('index', index || this.nextIndex());
+    }
 
     /* Creates an index for the book, stores it in the localStorage and updates the current index */
     static storeBook(book) {
-        const newIndex = Number(this.getCurIndex()) + 1;
+        const newIndex = this.nextIndex();
         this.setBook(newIndex, book);
-        this.changeIndex(newIndex + 1);
+        this.updateIndex(newIndex);
         return newIndex;
     }
 
