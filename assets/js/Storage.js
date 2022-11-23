@@ -49,6 +49,12 @@ export default class Storage {
       return book;
   }
 
+  static toggleProp(propName, itemId) {
+    const bookData = this.getSingleBook(itemId);
+    bookData[propName] = !bookData[propName];
+    this.setBook(itemId, bookData);
+  }
+
   static removeBook(id) {
       localStorage.removeItem(id);
   }
